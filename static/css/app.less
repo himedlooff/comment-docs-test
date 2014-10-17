@@ -130,22 +130,27 @@ body {
 
     &_code-container {
         .component-box();
-        padding: (@padding - 10px);
+        padding: @padding - 10px;
         border-radius: 4px;
+
+        clear: both;
 
         .btn__less,
         .btn__css {
+            position: relative;
             float: right;
+            // top: -10px;
+            margin: -10px -10px 0 0;
             font-size: unit(12px / @base-font-size-px, em);
+        }
+
+        .btn__css + .btn__less {
+            margin-right: 1px;
         }
     }
 
     &_code {
-        margin-top: (@padding - 10px);
-    }
-
-    &_code__css {
-        display: none;
+        // margin-top: (@padding - 10px);
     }
 
 }

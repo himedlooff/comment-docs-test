@@ -86,11 +86,13 @@ $.getJSON("/static/css/main.json", function(json) {
             } else if ( $codeAlt !== undefined ) {
               $codeContainer.append('<button class="btn btn__disabled btn__less">LESS</button>');
             }
-            if ( $code !== undefined ) {
-              $codeContainer.append( $code );
-            }
-            if ( $codeAlt !== undefined ) {
+            if ( $codeAlt !== undefined && $code !== undefined ) {
               $codeContainer.append( $codeAlt );
+              $codeContainer.append( $code.hide() );
+            } else if ( $codeAlt !== undefined ) {
+              $codeContainer.append( $codeAlt );
+            } else if ( $code !== undefined ) {
+              $codeContainer.append( $code );
             }
             $codeCol.append( $codeContainer );
             $commentDoc.append( $codeCol );
