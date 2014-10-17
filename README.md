@@ -14,7 +14,7 @@ Then Install [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/):
 $ npm install -g grunt-cli bower
 ```
 
-## Developing
+### Developing
 
 Each time you fetch from upstream, install dependencies with npm and run `grunt`
 to build everything:
