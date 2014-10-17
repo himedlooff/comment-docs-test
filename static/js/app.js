@@ -94,8 +94,10 @@ $.getJSON("/static/css/main.json", function(json) {
             } else if ( $code !== undefined ) {
               $codeContainer.append( $code );
             }
-            $codeCol.append( $codeContainer );
-            $commentDoc.append( $codeCol );
+            if ( $code !== undefined || $codeAlt !== undefined ) {
+              $codeCol.append( $codeContainer );
+              $commentDoc.append( $codeCol );
+            }
             $('#body').append( $commentDoc );
             Prism.highlightAll();
           });
