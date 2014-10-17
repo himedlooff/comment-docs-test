@@ -20,6 +20,7 @@ $.getJSON("/static/css/main.json", function(json) {
         $('#body').empty();
         $.each(families[key], function(index, item){
           var componentName = item.docs.name;
+          var $codeCol = $('<div class="component_code-col"></div>');
           var $codeContainer = $('<div class="component_code-container"></div>');
           var $code = $('' +
             '<div class="component_code component_code__css">' +
@@ -62,7 +63,8 @@ $.getJSON("/static/css/main.json", function(json) {
             $codeContainer.append( $codeAlt );
           }
           $codeContainer.append( $code );
-          $commentDoc.append( $codeContainer );
+          $codeCol.append( $codeContainer );
+          $commentDoc.append( $codeCol );
           $('#body').append( $commentDoc );
           Prism.highlightAll();
         });
@@ -76,14 +78,18 @@ $.getJSON("/static/css/main.json", function(json) {
   });
   $('#nav').append(html);
   $('#nav').find('.nav_btn').first().trigger('focus');
-  $('.btn__less').on('click', function() {
+  $('.btn__less').removeClass('btn__secondary').on('click', function() {
     $this = $( this );
-    $this.parents('.component_code-container').find('.component_code').hide();
-    $this.parents('.component_code-container').find('.component_code__less').show();
+    $this.parents('.component_code-col').find('.btn').addClass('btn__secondary');
+    $this.removeClass('btn__secondary');
+    $this.parents('.component_code-col').find('.component_code').hide();
+    $this.parents('.component_code-col').find('.component_code__less').show();
   });
   $('.btn__css').on('click', function() {
     $this = $( this );
-    $this.parents('.component_code-container').find('.component_code').hide();
-    $this.parents('.component_code-container').find('.component_code__css').show();
+    $this.parents('.component_code-col').find('.btn').addClass('btn__secondary');
+    $this.removeClass('btn__secondary');
+    $this.parents('.component_code-col').find('.component_code').hide();
+    $this.parents('.component_code-col').find('.component_code__css').show();
   });
 });

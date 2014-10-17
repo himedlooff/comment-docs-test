@@ -124,15 +124,18 @@ body {
         border-bottom-left-radius: 4px;
     }
 
-    &_code-container {
+    &_code-col {
         .grid_column(5);
     }
 
-    &_code,
-    &_code[class*="language-"] {
+    &_code-container {
         .component-box();
         padding: (@padding - 10px);
         border-radius: 4px;
+    }
+
+    &_code {
+        margin-top: (@padding - 10px);
     }
 
     &_code__css {
