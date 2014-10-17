@@ -15,7 +15,6 @@ $.getJSON("/static/css/main.json", function(json) {
         $button.data('family-key', item.docs.family);
         $button.data('index', index);
         $button.on('focus', function(){
-        console.log('poop');
         var key = $(this).data('family-key');
         var index = $(this).data('index');
         $('#body').empty();
@@ -42,10 +41,8 @@ $.getJSON("/static/css/main.json", function(json) {
           });
           $('#body').append( $markup );
           $('#body').append( $code );
-          // console.log(item);
           Prism.highlightAll();
         });
-        console.log('=============');
       });
       html = html.add($('<li class="nav_item">').append($button));
       families[item.docs.family].push(item);
