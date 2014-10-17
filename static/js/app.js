@@ -15,22 +15,33 @@ $.getJSON("/static/css/main.json", function(json) {
                $button.data('family-key', item.docs.family);
                $button.data('index', index);
                $button.on('focus', function(){
+                   console.log('poop');
                    var key = $(this).data('family-key');
                    var index = $(this).data('index');
-                   $('#code').empty();
-                   $('#markup').empty();
+                   $('#body').empty();
                    $.each(families[key], function(index, item){
-                       var componentName = item.docs.name;
-                       $('#code').append($('<div>').text(item.code).html());
+                      var componentName = item.docs.name;
+                      var $code = $('' +
+                        '<div class="container-code">' +
+                          '<pre class="component_code">' +
+                            '<code class="language-css">'+
+                              $('<div>').text(item.code).html() +
+                            '</code>' +
+                            '</pre>' +
+                          '</div>'
+                      );
+                      var $markup = $('<div class="container-patterns"></div>');
                        $.each(item.docs.patterns, function(index, item){
                            if ( item.markup !== undefined ) {
                               var $component = $('<div class="component"></div>');
                                $component.append('<h1 class="component_name">'+componentName+': '+item.name+'</h1>');
                                $component.append('<div class="component_rendered">'+item.markup+'</div>');
                                $component.append('<pre class="component_markup"><code id="pattern-markup" class="language-markup">'+$('<div>').text(item.markup).html()+'</code></pre>');
-                               $('#markup').append( $component );
+                               $markup.append( $component );
                            }
                        });
+                      $('#body').append( $markup );
+                      $('#body').append( $code );
                        // console.log(item);
                        Prism.highlightAll();
                    });
