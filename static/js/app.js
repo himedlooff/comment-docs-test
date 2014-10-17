@@ -20,29 +20,50 @@ $.getJSON("/static/css/main.json", function(json) {
         $('#body').empty();
         $.each(families[key], function(index, item){
           var componentName = item.docs.name;
+          var $codeContainer = $('<div class="component_code-container"></div>');
           var $code = $('' +
-            '<div class="container-code">' +
-              '<pre class="component_code">' +
+            '<div class="component_code component_code__css">' +
+              '<pre>' +
                 '<code class="language-css">'+
                   $('<div>').text(item.code).html() +
                 '</code>' +
+              '</pre>' +
+            '</div>'
+          );
+          var $codeAlt;
+          if ( item.code_alt ) {
+            $codeAlt = $('' +
+              '<div class="component_code component_code__less">' +
+                '<pre>' +
+                  '<code class="language-css">'+
+                    $('<div>').text(item.code_alt).html() +
+                  '</code>' +
                 '</pre>' +
               '</div>'
-          );
-          var $markup = $('<div class="container-patterns"></div>');
+            );
+          }
+          var $docs = $('<div class="component_docs"></div>');
           $.each(item.docs.patterns, function(index, item){
             if ( item.markup !== undefined ) {
               var $component = $('<div class="component"></div>');
               $component.append('<h1 class="component_name">'+componentName+': '+item.name+'</h1>');
               $component.append('<div class="component_rendered">'+item.markup+'</div>');
               $component.append('<pre class="component_markup"><code id="pattern-markup" class="language-markup">'+$('<div>').text(item.markup).html()+'</code></pre>');
-              $markup.append( $component );
+              $docs.append( $component );
             }
           });
-          var $commentDocItem = $('<div class="comment-doc_item"></div>');
-          $commentDocItem.append( $markup );
-          $commentDocItem.append( $code );
-          $('#body').append( $commentDocItem );
+          var $commentDoc = $('<div class="comment-doc"></div>');
+          $commentDoc.append( $docs );
+          if ( $codeAlt !== undefined ) {
+            $codeContainer.append('<button class="btn btn__secondary btn__less">LESS</button>');
+          }
+          $codeContainer.append('<button class="btn btn__secondary btn__css">CSS</button>');
+          if ( $codeAlt !== undefined ) {
+            $codeContainer.append( $codeAlt );
+          }
+          $codeContainer.append( $code );
+          $commentDoc.append( $codeContainer );
+          $('#body').append( $commentDoc );
           Prism.highlightAll();
         });
       });
@@ -55,4 +76,14 @@ $.getJSON("/static/css/main.json", function(json) {
   });
   $('#nav').append(html);
   $('#nav').find('.nav_btn').first().trigger('focus');
+  $('.btn__less').on('click', function() {
+    $this = $( this );
+    $this.parents('.component_code-container').find('.component_code').hide();
+    $this.parents('.component_code-container').find('.component_code__less').show();
+  });
+  $('.btn__css').on('click', function() {
+    $this = $( this );
+    $this.parents('.component_code-container').find('.component_code').hide();
+    $this.parents('.component_code-container').find('.component_code__css').show();
+  });
 });
