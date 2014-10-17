@@ -174,6 +174,6 @@ module.exports = function(grunt) {
   grunt.registerTask('vendor', ['bower:install', 'concat:cf-less']);
   grunt.registerTask('cssdev', ['less', 'autoprefixer']);
   grunt.registerTask('jsdev', ['concat:bodyScripts']);
-  grunt.registerTask('default', ['docs', 'cssdev', 'jsdev', 'copy:vendor']);
+  grunt.registerTask('default', ['vendor', 'docs', 'cssdev', 'jsdev', 'copy:vendor']);
 
 };

@@ -23,16 +23,6 @@ $ npm install
 $ grunt
 ```
 
-_Note that you'll get the following error:_
-```bash
-Warning: Error converting comment #4 to YAML. Please check for formatting errors. Use --force to continue.
-```
-
-This is because there are some Less commented Comment Doc comments in
-vendor/cf-concat/cf.less at the fourth comment doc. Delete those and re-run
-`grunt vendor` then `grunt`. This is an issue with Comment Docs that needs to be
-fixed.
-
 ## Getting involved
 
 We welcome your feedback and contributions.
