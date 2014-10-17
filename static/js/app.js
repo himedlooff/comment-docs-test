@@ -39,8 +39,10 @@ $.getJSON("/static/css/main.json", function(json) {
               $markup.append( $component );
             }
           });
-          $('#body').append( $markup );
-          $('#body').append( $code );
+          var $commentDocItem = $('<div class="comment-doc_item"></div>');
+          $commentDocItem.append( $markup );
+          $commentDocItem.append( $code );
+          $('#body').append( $commentDocItem );
           Prism.highlightAll();
         });
       });
