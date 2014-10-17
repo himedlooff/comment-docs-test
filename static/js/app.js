@@ -2,8 +2,26 @@
    comment-docs-test
    ========================================================================== */
 
+function initButtons() {
+ $('.btn__less').removeClass('btn__secondary').on('click', function() {
+   $this = $( this );
+   $this.parents('.component_code-col').find('.btn').addClass('btn__secondary');
+   $this.removeClass('btn__secondary');
+   $this.parents('.component_code-col').find('.component_code').hide();
+   $this.parents('.component_code-col').find('.component_code__less').show();
+ });
+ $('.btn__css').on('click', function() {
+   $this = $( this );
+   $this.parents('.component_code-col').find('.btn').addClass('btn__secondary');
+   $this.removeClass('btn__secondary');
+   $this.parents('.component_code-col').find('.component_code').hide();
+   $this.parents('.component_code-col').find('.component_code__css').show();
+ });
+}
+
 var html = $();
 var families = {};
+
 $.getJSON("/static/css/main.json", function(json) {
   var data = json;
   $.each(json, function(index, item){
@@ -22,17 +40,20 @@ $.getJSON("/static/css/main.json", function(json) {
             var componentName = item.docs.name;
             var $codeCol = $('<div class="component_code-col"></div>');
             var $codeContainer = $('<div class="component_code-container"></div>');
-            var $code = $('' +
-              '<div class="component_code component_code__css">' +
-                '<pre>' +
-                  '<code class="language-css">'+
-                    $('<div>').text(item.code).html() +
-                  '</code>' +
-                '</pre>' +
-              '</div>'
-            );
+            var $code;
+            if ( item.code && item.code.length > 0 ) {
+              $code = $('' +
+                '<div class="component_code component_code__css">' +
+                  '<pre>' +
+                    '<code class="language-css">'+
+                      $('<div>').text(item.code).html() +
+                    '</code>' +
+                  '</pre>' +
+                '</div>'
+              );
+            }
             var $codeAlt;
-            if ( item.code_alt ) {
+            if ( item.code_alt && item.code_alt.length > 0 ) {
               $codeAlt = $('' +
                 '<div class="component_code component_code__less">' +
                   '<pre>' +
@@ -44,30 +65,39 @@ $.getJSON("/static/css/main.json", function(json) {
               );
             }
             var $docs = $('<div class="component_docs"></div>');
-            $.each(item.docs.patterns, function(index, item){
-              if ( item.markup !== undefined ) {
-                var $component = $('<div class="component"></div>');
-                $component.append('<h1 class="component_name">'+componentName+': '+item.name+'</h1>');
-                $component.append('<div class="component_rendered">'+item.markup+'</div>');
-                $component.append('<pre class="component_markup"><code id="pattern-markup" class="language-markup">'+$('<div>').text(item.markup).html()+'</code></pre>');
-                $docs.append( $component );
-              }
-            });
+            if ( item.docs.patterns !== undefined ) {
+              $.each(item.docs.patterns, function(index, item){
+                if ( item.markup !== undefined ) {
+                  var $component = $('<div class="component"></div>');
+                  $component.append('<h1 class="component_name">'+componentName+': '+item.name+'</h1>');
+                  $component.append('<div class="component_rendered">'+item.markup+'</div>');
+                  $component.append('<pre class="component_markup"><code id="pattern-markup" class="language-markup">'+$('<div>').text(item.markup).html()+'</code></pre>');
+                  $docs.append( $component );
+                }
+              });
+            }
             var $commentDoc = $('<div class="comment-doc"></div>');
             $commentDoc.append( $docs );
-            if ( $codeAlt !== undefined ) {
-              $codeContainer.append('<button class="btn btn__secondary btn__less">LESS</button>');
+            if ( $code !== undefined && $codeAlt !== undefined ) {
+              $codeContainer.append('<button class="btn btn__secondary btn__grouped-last btn__css">CSS</button>');
+              $codeContainer.append('<button class="btn btn__secondary btn__grouped-first btn__less">LESS</button>');
+            } else if ( $code !== undefined ) {
+              $codeContainer.append('<button class="btn btn__disabled btn__css">CSS</button>');
+            } else if ( $codeAlt !== undefined ) {
+              $codeContainer.append('<button class="btn btn__disabled btn__less">LESS</button>');
             }
-            $codeContainer.append('<button class="btn btn__secondary btn__css">CSS</button>');
+            if ( $code !== undefined ) {
+              $codeContainer.append( $code );
+            }
             if ( $codeAlt !== undefined ) {
               $codeContainer.append( $codeAlt );
             }
-            $codeContainer.append( $code );
             $codeCol.append( $codeContainer );
             $commentDoc.append( $codeCol );
             $('#body').append( $commentDoc );
             Prism.highlightAll();
           });
+          initButtons();
         });
         html = html.add($('<li class="nav_item">').append($button));
         families[item.docs.family].push(item);
@@ -76,25 +106,9 @@ $.getJSON("/static/css/main.json", function(json) {
       }
     }
   });
+
   $('#nav').append(html);
   $('#nav').find('.nav_btn').first().trigger('focus');
-
-  function initButtons() {
-    $('.btn__less').removeClass('btn__secondary').on('click', function() {
-      $this = $( this );
-      $this.parents('.component_code-col').find('.btn').addClass('btn__secondary');
-      $this.removeClass('btn__secondary');
-      $this.parents('.component_code-col').find('.component_code').hide();
-      $this.parents('.component_code-col').find('.component_code__less').show();
-    });
-    $('.btn__css').on('click', function() {
-      $this = $( this );
-      $this.parents('.component_code-col').find('.btn').addClass('btn__secondary');
-      $this.removeClass('btn__secondary');
-      $this.parents('.component_code-col').find('.component_code').hide();
-      $this.parents('.component_code-col').find('.component_code__css').show();
-    });
-  }
 
   initButtons();
 

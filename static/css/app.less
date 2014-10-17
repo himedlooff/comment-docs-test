@@ -132,6 +132,12 @@ body {
         .component-box();
         padding: (@padding - 10px);
         border-radius: 4px;
+
+        .btn__less,
+        .btn__css {
+            float: right;
+            font-size: unit(12px / @base-font-size-px, em);
+        }
     }
 
     &_code {
@@ -141,4 +147,5 @@ body {
     &_code__css {
         display: none;
     }
+
 }
