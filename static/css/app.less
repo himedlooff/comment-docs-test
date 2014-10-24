@@ -3,9 +3,7 @@
    App-specific styles
    ========================================================================== */
 
-@cream: #f5f2f0;
-
-body {
+.body {
     padding: 0;
 }
 
@@ -14,7 +12,7 @@ body {
     padding: @grid_gutter-width / 2;
 }
 
-.body {
+.main {
     padding: @grid_gutter-width (@grid_gutter-width / 2);
     box-shadow: 0 0 10px fade(@black, 50);
 }
@@ -61,11 +59,12 @@ body {
 
 .component {
 
+    // Change the color palette
+    #app-colors .component();
+
     // Variables
 
     @padding: 30px;
-    @bg: @cream;
-    @border: darken(@cream, 10%);
 
     // Mixins
 
@@ -110,15 +109,14 @@ body {
 
         position: relative;
         z-index: 2;
-        box-shadow: 0 0 20px darken(@cream, 30%);
+        box-shadow: 0 0 20px @shadow;
     }
 
     &_docs {
         .grid_column(7);
     }
 
-    &_markup,
-    &_markup[class*="language-"] {
+    &_markup {
         .component-box();
         border-bottom-right-radius: 4px;
         border-bottom-left-radius: 4px;
@@ -133,7 +131,7 @@ body {
         padding: @padding - 10px;
         border-radius: 4px;
 
-        clear: both;
+        overflow-x: scroll;
 
         .btn__less,
         .btn__css {
@@ -150,7 +148,12 @@ body {
     }
 
     &_code {
-        // margin-top: (@padding - 10px);
+        float: left;
+        pre,
+        code {
+            margin: 0;
+            word-wrap: normal;
+        }
     }
 
 }

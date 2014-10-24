@@ -1,0 +1,78 @@
+/* ==========================================================================
+   comment-docs-test
+   highlightjs overrides
+   ========================================================================== */
+
+/*
+
+Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmail.com>
+
+*/
+
+.hljs {
+    #app-colors .code();
+    display: block;
+    margin: 0;
+    padding: 0;
+    background: @bg;
+    color: @fg;
+    font-size: 13px;
+    -webkit-text-size-adjust: none;
+}
+
+.lang-xml {
+    font-size: 15px;
+}
+
+.lang-css .hljs,
+.lang-less .hljs {
+
+    #app-colors .code();
+
+    &-comment {
+        color: @light-gray;
+    }
+    &-variable,
+    &-at_rule {
+        color: @green;
+    }
+    &-tag,
+    &-keyword,
+    &-class,
+    &-pseudo {
+        color: @blue;
+    }
+    &-attribute {
+        color: @plum;
+    }
+    &-function,
+    &-important {
+        color: @rose;
+    }
+    &-string {
+        color: @copper;
+    }
+
+}
+
+.lang-xml .hljs {
+
+    #app-colors .code();
+
+    &-comment {
+        color: @light-gray;
+    }
+    &-value {
+        color: @blue;
+    }
+    &-tag {
+        color: @plum-light;
+    }
+    &-title {
+        color: @plum;
+    }
+    &-attribute {
+        color: @green;
+    }
+
+}

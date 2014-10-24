@@ -35,7 +35,7 @@ $.getJSON("/static/css/main.json", function(json) {
         $button.on('focus', function(){
           var key = $(this).data('family-key');
           var index = $(this).data('index');
-          $('#body').empty();
+          $('#main').empty();
           $.each(families[key], function(index, item){
             var componentName = item.docs.name;
             var $codeCol = $('<div class="component_code-col"></div>');
@@ -45,7 +45,7 @@ $.getJSON("/static/css/main.json", function(json) {
               $code = $('' +
                 '<div class="component_code component_code__css">' +
                   '<pre>' +
-                    '<code class="language-css">'+
+                    '<code class="lang-css">'+
                       $('<div>').text(item.code).html() +
                     '</code>' +
                   '</pre>' +
@@ -57,7 +57,7 @@ $.getJSON("/static/css/main.json", function(json) {
               $codeAlt = $('' +
                 '<div class="component_code component_code__less">' +
                   '<pre>' +
-                    '<code class="language-css">'+
+                    '<code class="lang-less">'+
                       $('<div>').text(item.code_alt).html() +
                     '</code>' +
                   '</pre>' +
@@ -71,7 +71,7 @@ $.getJSON("/static/css/main.json", function(json) {
                   var $component = $('<div class="component"></div>');
                   $component.append('<h1 class="component_name">'+componentName+': '+item.name+'</h1>');
                   $component.append('<div class="component_rendered">'+item.markup+'</div>');
-                  $component.append('<pre class="component_markup"><code id="pattern-markup" class="language-markup">'+$('<div>').text(item.markup).html()+'</code></pre>');
+                  $component.append('<pre class="component_markup"><code id="pattern-markup" class="lang-xml">'+$('<div>').text(item.markup).html()+'</code></pre>');
                   $docs.append( $component );
                 }
               });
@@ -98,8 +98,10 @@ $.getJSON("/static/css/main.json", function(json) {
               $codeCol.append( $codeContainer );
               $commentDoc.append( $codeCol );
             }
-            $('#body').append( $commentDoc );
-            Prism.highlightAll();
+            $('#main').append( $commentDoc );
+          });
+          $('.lang-css, .lang-less, .lang-xml').each(function(i, block) {
+            hljs.highlightBlock(block);
           });
           initButtons();
         });
