@@ -28,8 +28,7 @@
     "cf-icons": "git://github.com/cfpb/cf-icons.git#0.4.0",
     "cf-pagination": "git://github.com/cfpb/cf-pagination.git#0.4.1",
     "jquery": "~1.11.0",
-    "highlightjs": "~8.3.0",
-    "prism": "git://github.com/himedlooff/prism/#gh-pages"
+    "highlightjs": "~8.3.0"
   },
   "exportsOverride": {
     "cf-*": {
