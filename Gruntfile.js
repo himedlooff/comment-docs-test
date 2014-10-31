@@ -56,10 +56,12 @@ module.exports = function(grunt) {
       },
       bodyScripts: {
         src: [
-          'vendor/jquery/jquery.js',
-          'vendor/jquery.easing/jquery.easing.js',
-          'vendor/cf-*/*.js',
-          'vendor/highlightjs/highlight.pack.js',
+          'vendor/angular/angular.js',
+          'vendor/angular-sanitize/angular-sanitize.js',
+          // 'vendor/jquery/jquery.js',
+          // 'vendor/jquery.easing/jquery.easing.js',
+          // 'vendor/cf-*/*.js',
+          // 'vendor/highlightjs/highlight.pack.js',
           'static/js/app.js'
         ],
         dest: 'static/js/main.js'

@@ -4,19 +4,33 @@
     <meta charset="UTF-8">
     <title>comment-docs-test</title>
     <link rel="stylesheet" href="/static/css/main.css">
+    <script src="/static/js/main.js"></script>
 </head>
-<body class="body">
+<body ng-app="doxrayApp" class="body">
 
-    <div class="masthead">
+    <div ng-controller="MastheadCtrl" class="masthead">
         <ul class="nav" id="nav">
             <li class="nav_item">
-                <span class="nav_header">Docs:</span>
+                <span class="nav_header">{{ title }}</span>
+            </li>
+            <li ng-repeat="family in families" class="nav_item">
+                <button ng-click="setFamily(family)" class="nav_btn">{{ family }}</button>
             </li>
         </ul>
     </div>
 
-    <div class="main" id="main"></div>
+    <div ng-controller="DocsCtrl" class="main" id="main">
+        <ul>
+            <li ng-repeat="component in data | doxrayFamily:currentFamily">
+                {{ component.docs.name }}<br>
+            </li>
+        </ul>
+        <div ng-repeat="component in data | doxrayFamily:currentFamily">
+            <div ng-repeat="pattern in component.docs.patterns">
+                <div ng-bind-html="pattern.markup"></div>
+            </div>
+        </div>
+    </div>
 
-    <script src="/static/js/main.js"></script>
 </body>
 </html>
