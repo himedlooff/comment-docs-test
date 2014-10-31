@@ -20,14 +20,26 @@
     </div>
 
     <div ng-controller="DocsCtrl" class="main" id="main">
-        <ul>
+        <!-- Side nav -->
+        <!-- <ul class="nav">
             <li ng-repeat="component in data | doxrayFamily:currentFamily">
-                {{ component.docs.name }}<br>
+                <button class="btn btn__link">
+                    {{ component.docs.name }}
+                </button>
             </li>
-        </ul>
-        <div ng-repeat="component in data | doxrayFamily:currentFamily">
-            <div ng-repeat="pattern in component.docs.patterns">
-                <div ng-bind-html="pattern.markup"></div>
+        </ul> -->
+        <div class="component_docs">
+            <div ng-repeat="component in data | doxrayFamily:currentFamily" class="component">
+                <h1 class="component_name">{{ component.docs.name }}</h1>
+                <div ng-repeat="pattern in component.docs.patterns" class="component">
+                    <h1 ng-if="pattern.name" class="component_name">{{ pattern.name }}</h1>
+                    <div ng-if="pattern.markup"
+                         ng-bind-html="pattern.markup"
+                         class="component_rendered"></div>
+                    <pre ng-if="pattern.markup" class="component_markup">
+                        <code id="pattern-markup" class="lang-xml">{{ pattern.markup }}</code>
+                    </pre>
+                </div>
             </div>
         </div>
     </div>
