@@ -17,7 +17,7 @@
       $http.get( jsonPath ).
         success( function( response, status, headers, config ) {
           var cleanResponse = $filter('doxrayClean')( response );
-          cleanResponse = $filter('doxrayTrustMarkup')( response );
+          cleanResponse = $filter('doxrayTrustMarkup')( cleanResponse );
           angular.copy( cleanResponse, data );
         }).
         error( function ( data, status, headers, config ) {
@@ -95,24 +95,6 @@
     };
   });
 
-  /* Filter a DoxRay array to a list of unique docs.family names
-     ========================================================================== */
-  angular.module('doxrayApp').filter( 'doxrayFamilies', function () {
-    return function( items ) {
-      var output = [];
-      angular.forEach( items, function( item ) {
-        try {
-          if ( output.indexOf( item.docs.family ) === -1 ) {
-            output.push( item.docs.family );
-          }
-        } catch ( e ) {
-          console.error( e );
-        }
-      });
-      return output;
-    };
-  });
-
   /* Filter a DoxRay array by by trusting HTML in docs.patterns[x].markup
      ========================================================================== */
   angular.module('doxrayApp').filter( 'doxrayTrustMarkup', function ( $sce ) {
@@ -139,6 +121,24 @@
     };
   });
 
+  /* Filter a DoxRay array to a list of unique docs.family names
+     ========================================================================== */
+  angular.module('doxrayApp').filter( 'doxrayFamilies', function () {
+    return function( items ) {
+      var output = [];
+      angular.forEach( items, function( item, index ) {
+        try {
+          if ( output.indexOf( item.docs.family ) === -1 ) {
+            output.push( item.docs.family );
+          }
+        } catch ( e ) {
+          console.error( e );
+        }
+      });
+      return output;
+    };
+  });
+
   /* Filter a DoxRay array by removing anything with docs.name = EOF
      ========================================================================== */
   angular.module('doxrayApp').filter( 'doxrayClean', function () {
@@ -146,7 +146,7 @@
       var output = [];
       angular.forEach( items, function( item ) {
         try {
-          if ( item.docs.name !== "EOF" ) {
+          if ( typeof item.docs.eof === 'undefined' ) {
             output.push( item );
           }
         } catch ( e ) {

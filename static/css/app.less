@@ -57,10 +57,10 @@
     }
 }
 
-.component {
+.pattern {
 
     // Change the color palette
-    #app-colors .component();
+    #app-colors .pattern();
 
     // Variables
 
@@ -68,7 +68,7 @@
 
     // Mixins
 
-    .component-box {
+    .pattern-box {
         display: block;
         padding: (@padding - 10px) @padding;
         margin: 0 0 -1px;
@@ -88,7 +88,7 @@
     // Elements
 
     &_name {
-        .component-box();
+        .pattern-box();
         border-top-right-radius: 4px;
         border-top-left-radius: 4px;
 
@@ -101,7 +101,7 @@
     }
 
     &_rendered {
-        .component-box();
+        .pattern-box();
         padding: @padding;
         margin: -2px -5px -5px;
         border: 0;
@@ -117,7 +117,7 @@
     }
 
     &_markup {
-        .component-box();
+        .pattern-box();
         border-bottom-right-radius: 4px;
         border-bottom-left-radius: 4px;
     }
@@ -127,7 +127,7 @@
     }
 
     &_code-container {
-        .component-box();
+        .pattern-box();
         padding: @padding - 10px;
         border-radius: 4px;
 
