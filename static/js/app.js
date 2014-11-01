@@ -31,35 +31,26 @@
     };
   });
 
-  angular.module('doxrayApp').service( 'stateService', function () {
-    var currentFamily = '';
-    return {
-      currentFamily: currentFamily
-    };
-  });
-
-  angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $filter, dataService, stateService ) {
+  angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $filter, dataService ) {
     // Properties
     $scope.title = 'Docs:';
     $scope.data = dataService.data;
     $scope.families = [];
     $scope.currentFamily = '';
-    // Properties to watch
-    $scope.$watch(
-      function () {
-        return stateService.currentFamily;
-      },
-      function( newCurrentFamily, oldCurrentFamily ) {
-        $scope.currentFamily = newCurrentFamily;
-      }
-    );
+    // Events
     $scope.$watchCollection( 'data', function( newData, oldData ) {
       $scope.families = $filter('doxrayFamilies')( newData );
-      stateService.currentFamily = $scope.families[ 0 ];
+      $scope.currentFamily = $scope.families[ 0 ];
+    });
+    $scope.$on( 'onRepeatLast', function( scope, element, attrs ){
+      var code = document.querySelectorAll('.lang-css, .lang-less, .lang-xml');
+      angular.forEach( code, function( element ) {
+        hljs.highlightBlock( element );
+      });
     });
     // Functions
     $scope.setFamily = function ( family ) {
-      stateService.currentFamily = family;
+      $scope.currentFamily = family;
     };
     $scope.toggleCSS = function ( pattern ) {
       pattern.showCSS = true;
@@ -69,14 +60,6 @@
       pattern.showCSS = false;
       pattern.showLESS = true;
     };
-    // Init stuff
-    $scope.setFamily( stateService.currentFamily );
-    $scope.$on( 'onRepeatLast', function( scope, element, attrs ){
-      var code = document.querySelectorAll('.lang-css, .lang-less, .lang-xml');
-      angular.forEach( code, function( element ) {
-        hljs.highlightBlock( element );
-      });
-    });
   });
 
   /* Return an array of Dox-ray objects prepped for use in doxrayApp.
