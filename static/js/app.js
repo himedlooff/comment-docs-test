@@ -75,10 +75,10 @@
   angular.module('doxrayApp').filter( 'doxrayFamily', function () {
     return function( patterns, family ) {
       var output = [];
-      angular.forEach( patterns, function( subPattern ) {
+      angular.forEach( patterns, function( pattern ) {
         try {
-          if ( subPattern.docs.family === family ) {
-            output.push( subPattern );
+          if ( pattern.docs.family === family ) {
+            output.push( pattern );
           }
         } catch ( e ) {
           console.error( e );
@@ -93,10 +93,10 @@
   angular.module('doxrayApp').filter( 'doxrayFamilies', function () {
     return function( patterns ) {
       var output = [];
-      angular.forEach( patterns, function( subPattern, index ) {
+      angular.forEach( patterns, function( pattern, index ) {
         try {
-          if ( output.indexOf( subPattern.docs.family ) === -1 ) {
-            output.push( subPattern.docs.family );
+          if ( output.indexOf( pattern.docs.family ) === -1 ) {
+            output.push( pattern.docs.family );
           }
         } catch ( e ) {
           console.error( e );
