@@ -40,9 +40,6 @@
         angular.copy( filteredResponse, $scope.data );
         $scope.families = $filter('doxrayFamilies')( $scope.data );
         $scope.currentFamily = $scope.families[ 0 ];
-      }).
-      error( function ( data, status, headers, config ) {
-        console.error( 'Error getting', $scope.jsonPath );
       });
   });
 
