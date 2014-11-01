@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="/static/css/main.css">
     <script src="/static/js/main.js"></script>
 </head>
-<body ng-app="doxrayApp" class="body">
+<body ng-app="doxrayApp" ng-controller="DocsCtrl" class="body">
 
-    <div ng-controller="MastheadCtrl" class="masthead">
+    <div class="masthead">
         <ul class="nav" id="nav">
             <li class="nav_item">
                 <span class="nav_header">{{ title }}</span>
@@ -19,7 +19,7 @@
         </ul>
     </div>
 
-    <div ng-controller="DocsCtrl" class="main" id="main">
+    <div class="main" id="main">
         <!-- Side nav -->
         <!-- <ul class="nav">
             <li ng-repeat="pattern in data | doxrayFamily:currentFamily">

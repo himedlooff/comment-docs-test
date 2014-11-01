@@ -39,40 +39,27 @@
     };
   });
 
-  angular.module('doxrayApp').controller( 'MastheadCtrl', function ( $scope, $filter, dataService, stateService ) {
+  angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $filter, dataService, stateService ) {
+    // Properties
     $scope.title = 'Docs:';
     $scope.data = dataService.data;
     $scope.families = [];
-    $scope.$watchCollection( 'data', function( newVal, oldVal ) {
-      $scope.families = $filter('doxrayFamilies')( newVal );
-      stateService.currentFamily = $scope.families[0];
+    $scope.currentFamily = stateService.currentFamily;
+    // Properties to watch
+    $scope.$watch(
+      function () {
+        return stateService.currentFamily;
+      },
+      function( newCurrentFamily, oldCurrentFamily ) {
+        $scope.currentFamily = newCurrentFamily;
+      }
+    );
+    $scope.$watchCollection( 'data', function( newData, oldData ) {
+      $scope.families = $filter('doxrayFamilies')( newData );
+      stateService.currentFamily = $scope.families[ 0 ];
     });
-    $scope.currentFamily = stateService.currentFamily;
-    $scope.$watch(
-      function () {
-        return stateService.currentFamily;
-      },
-      function( newVal, oldVal ) {
-        $scope.currentFamily = newVal;
-      }
-    );
-    $scope.setFamily = function( family ) {
-      stateService.currentFamily = family;
-    };
-  });
-
-  angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $filter, dataService, stateService, $sce ) {
-    $scope.data = dataService.data;
-    $scope.currentFamily = stateService.currentFamily;
-    $scope.$watch(
-      function () {
-        return stateService.currentFamily;
-      },
-      function( newVal, oldVal ) {
-        $scope.currentFamily = newVal;
-      }
-    );
-    $scope.setFamily = function( family ) {
+    // Functions
+    $scope.setFamily = function ( family ) {
       stateService.currentFamily = family;
     };
   });
