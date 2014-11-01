@@ -48,23 +48,19 @@
   angular.module('doxrayApp').filter( 'doxrayAppData', function ( $sce ) {
     return function( patterns ) {
       var output = [];
-      angular.forEach( patterns, function( subPattern ) {
+      angular.forEach( patterns, function( pattern ) {
         try {
-          // Convert subPattern[x].docs.patterns[y].markup into "trusted HTML".
-          if ( subPattern.docs.patterns ) {
-            angular.forEach( subPattern.docs.patterns, function( subPattern ) {
-              try {
-                if ( subPattern.markup ) {
-                  subPattern.markup = $sce.trustAsHtml( subPattern.markup );
-                }
-              } catch ( e ) {
-                console.error( e );
+          if ( pattern.docs.patterns ) {
+            angular.forEach( pattern.docs.patterns, function( subPattern ) {
+              // Convert subPattern[x].docs.patterns[y].markup into "trusted HTML".
+              if ( subPattern.markup ) {
+                subPattern.markup = $sce.trustAsHtml( subPattern.markup );
               }
             });
           }
           // Filter out any EOF Dox-ray objects.
-          if ( typeof subPattern.docs.eof === 'undefined' ) {
-            output.push( subPattern );
+          if ( typeof pattern.docs.eof === 'undefined' ) {
+            output.push( pattern );
           }
         } catch ( e ) {
           console.error( e );
