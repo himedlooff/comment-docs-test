@@ -10,7 +10,7 @@
   angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $http, $filter ) {
     // Properties
     $scope.jsonPath = '/static/css/main.json';
-    $scope.title = 'Docs:';
+    $scope.title = 'Capital Framework Docs';
     $scope.data = [];
     $scope.families = [];
     $scope.currentFamily = '';

@@ -9,25 +9,24 @@
 <body ng-app="doxrayApp" ng-controller="DocsCtrl" class="body">
 
     <div class="masthead">
-        <ul class="nav" id="nav">
-            <li class="nav_item">
-                <span class="nav_header">{{ title }}</span>
-            </li>
+        <h1 class="masthead_title">{{ title }}</h1>
+        <ul class="nav">
             <li ng-repeat="family in families" class="nav_item">
                 <button ng-click="setFamily(family)" class="nav_btn">{{ family }}</button>
+                <!-- <ul class="nav nav__sub">
+                    <li ng-repeat="pattern in data | doxrayFamily:family"
+                        ng-if="family == currentFamily">
+                        <button class="nav_btn nav_btn__sub">
+                            {{ pattern.docs.name }}
+                        </button>
+                    </li>
+                </ul> -->
             </li>
         </ul>
     </div>
 
     <div class="main" id="main">
         <!-- Side nav -->
-        <!-- <ul class="nav">
-            <li ng-repeat="pattern in data | doxrayFamily:currentFamily">
-                <button class="btn btn__link">
-                    {{ pattern.docs.name }}
-                </button>
-            </li>
-        </ul> -->
         <div ng-repeat="pattern in data | doxrayFamily:currentFamily"
              on-last-repeat
              class="pattern">
@@ -56,7 +55,19 @@
                     <div ng-if="pattern.markup"
                          ng-bind-html="pattern.markup"
                          class="pattern_rendered"></div>
-                    <pre ng-if="pattern.markup" class="pattern_markup"><code class="lang-xml">{{ pattern.markup }}</code></pre>
+                    <pre ng-if="pattern.markup" class="pattern_content"><code class="lang-xml">{{ pattern.markup }}</code></pre>
+                    <div ng-if="pattern.codenotes" class="pattern_content">
+                        <div ng-repeat="codenote in pattern.codenotes">
+                            <pre><code>{{ codenote }}</code></pre>
+                        </div>
+                    </div>
+                    <div ng-if="pattern.notes" class="pattern_content">
+                        <ul>
+                            <li ng-repeat="note in pattern.notes">
+                                {{ note }}
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <div ng-if="pattern.code || pattern.code_alt"
