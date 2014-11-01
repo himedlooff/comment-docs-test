@@ -44,7 +44,7 @@
     $scope.title = 'Docs:';
     $scope.data = dataService.data;
     $scope.families = [];
-    $scope.currentFamily = stateService.currentFamily;
+    $scope.currentFamily = '';
     // Properties to watch
     $scope.$watch(
       function () {
@@ -62,6 +62,10 @@
     $scope.setFamily = function ( family ) {
       stateService.currentFamily = family;
     };
+    $scope.setFamily( stateService.currentFamily );
+    $scope.$on( 'onRepeatLast', function( scope, element, attrs ){
+      hljs.initHighlighting();
+    });
   });
 
   /* Filter a DoxRay array to objects with the same docs.family name
@@ -141,6 +145,16 @@
         }
       });
       return output;
+    };
+  });
+
+  angular.module('doxrayApp').directive( 'onLastRepeat', function () {
+    return function( scope, element, attrs ) {
+      if ( scope.$last ) {
+        setTimeout(function () {
+          scope.$emit( 'onRepeatLast', element, attrs );
+        }, 1);
+      }
     };
   });
 

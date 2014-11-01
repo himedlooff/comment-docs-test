@@ -28,17 +28,43 @@
                 </button>
             </li>
         </ul> -->
-        <div class="pattern_docs">
-            <div ng-repeat="pattern in data | doxrayFamily:currentFamily" class="pattern">
+        <div ng-repeat="pattern in data | doxrayFamily:currentFamily"
+             on-last-repeat
+             class="pattern">
+            <div class="pattern_docs">
                 <h1 class="pattern_name">{{ pattern.docs.name }}</h1>
                 <div ng-repeat="pattern in pattern.docs.patterns" class="pattern">
                     <h1 ng-if="pattern.name" class="pattern_name">{{ pattern.name }}</h1>
                     <div ng-if="pattern.markup"
                          ng-bind-html="pattern.markup"
                          class="pattern_rendered"></div>
-                    <pre ng-if="pattern.markup" class="pattern_markup">
-                        <code id="pattern-markup" class="lang-xml">{{ pattern.markup }}</code>
-                    </pre>
+                    <pre ng-if="pattern.markup" class="pattern_markup"><code id="pattern-markup" class="lang-xml">{{ pattern.markup }}</code></pre>
+                </div>
+            </div>
+            <div ng-if="pattern.code || pattern.code_alt" class="pattern_code-col">
+                <div class="pattern_code-container">
+                    <button ng-if="pattern.code"
+                            class="ng-class:{'btn__grouped-last':pattern.code_alt};
+                                   btn
+                                   btn__secondary
+                                   btn__css">
+                        CSS
+                    </button>
+                    <button ng-if="pattern.code_alt"
+                            class="ng-class:{'btn__grouped-first':pattern.code};
+                                   btn
+                                   btn__secondary
+                                   btn__less">
+                        LESS
+                    </button>
+                    <div ng-if="pattern.code"
+                         ng-hide="pattern.code_alt"
+                         class="pattern_code pattern_code__css">
+                        <pre><code class="lang-css">{{ pattern.code }}</code></pre>
+                    </div>
+                    <div ng-if="pattern.code_alt" class="pattern_code pattern_code__less">
+                        <pre><code class="lang-less">{{ pattern.code_alt }}</code></pre>
+                    </div>
                 </div>
             </div>
         </div>

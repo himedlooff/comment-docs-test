@@ -61,7 +61,7 @@ module.exports = function(grunt) {
           // 'vendor/jquery/jquery.js',
           // 'vendor/jquery.easing/jquery.easing.js',
           // 'vendor/cf-*/*.js',
-          // 'vendor/highlightjs/highlight.pack.js',
+          'vendor/highlightjs/highlight.pack.js',
           'static/js/app.js'
         ],
         dest: 'static/js/main.js'
