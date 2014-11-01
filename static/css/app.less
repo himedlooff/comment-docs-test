@@ -4,17 +4,18 @@
    ========================================================================== */
 
 .body {
+    background: @pacific;
     padding: 0;
 }
 
 .masthead {
-    background: @pacific;
-    padding: @grid_gutter-width / 2;
+    padding: @grid_gutter-width
+             (@grid_gutter-width + (@grid_gutter-width / 2))
+             0;
 }
 
 .main {
-    padding: @grid_gutter-width (@grid_gutter-width / 2);
-    box-shadow: 0 0 10px fade(@black, 50);
+    padding: @grid_gutter-width;
 }
 
 .nav {
@@ -79,13 +80,27 @@
     // Base
 
     & {
+        position: relative;
         margin: 0;
+        padding: (@padding + 10) (@padding / 2);
+        background: @white;
+        border-radius: 4px;
         & + & {
             margin-top: @padding;
         }
     }
 
     // Elements
+
+    &_title {
+        .grid_column(12);
+        @font-size: 32px;
+        margin: 0 0 @padding;
+        color: @black;
+        .webfont-regular();
+        font-size: unit(@font-size / @base-font-size-px, em);
+        line-height: 1;
+    }
 
     &_name {
         .pattern-box();
@@ -100,15 +115,21 @@
         line-height: 1;
     }
 
+    &_code-toggles {
+        position: absolute;
+        top: @grid_gutter-width;
+        right: @grid_gutter-width;
+    }
+
     .btn__less,
     .btn__css {
-        float: right;
-        margin: 0;
         font-size: unit(12px / @base-font-size-px, em);
     }
 
-    .btn__css + .btn__less {
-        margin-right: 1px;
+    &_sub-pattern {
+        & + & {
+            margin-top: @padding;
+        }
     }
 
     &_rendered {
