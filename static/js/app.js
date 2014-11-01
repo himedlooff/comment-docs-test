@@ -16,8 +16,7 @@
     var fetchData = function() {
       $http.get( jsonPath ).
         success( function( response, status, headers, config ) {
-          var cleanResponse = $filter('doxrayClean')( response );
-          cleanResponse = $filter('doxrayTrustMarkup')( cleanResponse );
+          var cleanResponse = $filter('doxrayAppData')( response );
           angular.copy( cleanResponse, data );
         }).
         error( function ( data, status, headers, config ) {
@@ -62,48 +61,47 @@
     $scope.setFamily = function ( family ) {
       stateService.currentFamily = family;
     };
+    $scope.toggleCSS = function ( pattern ) {
+      pattern.showCSS = true;
+      pattern.showLESS = false;
+    };
+    $scope.toggleLESS = function ( pattern ) {
+      pattern.showCSS = false;
+      pattern.showLESS = true;
+    };
+    // Init stuff
     $scope.setFamily( stateService.currentFamily );
     $scope.$on( 'onRepeatLast', function( scope, element, attrs ){
-      hljs.initHighlighting();
+      var code = document.querySelectorAll('.lang-css, .lang-less, .lang-xml');
+      angular.forEach( code, function( element ) {
+        hljs.highlightBlock( element );
+      });
     });
   });
 
-  /* Filter a DoxRay array to objects with the same docs.family name
+  /* Return an array of Dox-ray objects prepped for use in doxrayApp.
      ========================================================================== */
-  angular.module('doxrayApp').filter( 'doxrayFamily', function () {
-    return function( items, family ) {
+  angular.module('doxrayApp').filter( 'doxrayAppData', function ( $sce ) {
+    return function( patterns ) {
       var output = [];
-      angular.forEach( items, function( item ) {
+      angular.forEach( patterns, function( subPattern ) {
         try {
-          if ( item.docs.family === family ) {
-            output.push( item );
-          }
-        } catch ( e ) {
-          console.error( e );
-        }
-      });
-      return output;
-    };
-  });
-
-  /* Filter a DoxRay array by by trusting HTML in docs.patterns[x].markup
-     ========================================================================== */
-  angular.module('doxrayApp').filter( 'doxrayTrustMarkup', function ( $sce ) {
-    return function( items ) {
-      var output = items;
-      angular.forEach( items, function( item ) {
-        try {
-          if ( item.docs.patterns ) {
-            angular.forEach( item.docs.patterns, function( pattern ) {
+          // Convert subPattern[x].docs.patterns[y].markup into "trusted HTML".
+          if ( subPattern.docs.patterns ) {
+            angular.forEach( subPattern.docs.patterns, function( subPattern ) {
               try {
-                if ( pattern.markup ) {
-                  pattern.markup = $sce.trustAsHtml( pattern.markup );
+                if ( subPattern.markup ) {
+                  subPattern.markup = $sce.trustAsHtml( subPattern.markup );
                 }
               } catch ( e ) {
                 console.error( e );
               }
             });
           }
+          // Filter out any EOF Dox-ray objects.
+          if ( typeof subPattern.docs.eof === 'undefined' ) {
+            output.push( subPattern );
+          }
         } catch ( e ) {
           console.error( e );
         }
@@ -112,15 +110,33 @@
     };
   });
 
-  /* Filter a DoxRay array to a list of unique docs.family names
+  /* Return an array of Dox-ray objects of the same family.
+     ========================================================================== */
+  angular.module('doxrayApp').filter( 'doxrayFamily', function () {
+    return function( patterns, family ) {
+      var output = [];
+      angular.forEach( patterns, function( subPattern ) {
+        try {
+          if ( subPattern.docs.family === family ) {
+            output.push( subPattern );
+          }
+        } catch ( e ) {
+          console.error( e );
+        }
+      });
+      return output;
+    };
+  });
+
+  /* Return an array of unique Dox-ray item[x].docs.family names
      ========================================================================== */
   angular.module('doxrayApp').filter( 'doxrayFamilies', function () {
-    return function( items ) {
+    return function( patterns ) {
       var output = [];
-      angular.forEach( items, function( item, index ) {
+      angular.forEach( patterns, function( subPattern, index ) {
         try {
-          if ( output.indexOf( item.docs.family ) === -1 ) {
-            output.push( item.docs.family );
+          if ( output.indexOf( subPattern.docs.family ) === -1 ) {
+            output.push( subPattern.docs.family );
           }
         } catch ( e ) {
           console.error( e );
@@ -130,24 +146,8 @@
     };
   });
 
-  /* Filter a DoxRay array by removing anything with docs.name = EOF
+  /* Creates a hook when ng-repeat finishes
      ========================================================================== */
-  angular.module('doxrayApp').filter( 'doxrayClean', function () {
-    return function( items ) {
-      var output = [];
-      angular.forEach( items, function( item ) {
-        try {
-          if ( typeof item.docs.eof === 'undefined' ) {
-            output.push( item );
-          }
-        } catch ( e ) {
-          console.error( e );
-        }
-      });
-      return output;
-    };
-  });
-
   angular.module('doxrayApp').directive( 'onLastRepeat', function () {
     return function( scope, element, attrs ) {
       if ( scope.$last ) {

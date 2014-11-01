@@ -100,6 +100,17 @@
         line-height: 1;
     }
 
+    .btn__less,
+    .btn__css {
+        float: right;
+        margin: 0;
+        font-size: unit(12px / @base-font-size-px, em);
+    }
+
+    .btn__css + .btn__less {
+        margin-right: 1px;
+    }
+
     &_rendered {
         .pattern-box();
         padding: @padding;
@@ -132,19 +143,6 @@
         border-radius: 4px;
 
         overflow-x: scroll;
-
-        .btn__less,
-        .btn__css {
-            position: relative;
-            float: right;
-            // top: -10px;
-            margin: -10px -10px 0 0;
-            font-size: unit(12px / @base-font-size-px, em);
-        }
-
-        .btn__css + .btn__less {
-            margin-right: 1px;
-        }
     }
 
     &_code {
