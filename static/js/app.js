@@ -7,41 +7,14 @@
 
   angular.module( 'doxrayApp', ['ngSanitize'] );
 
-  angular.module('doxrayApp').service( 'dataService', function ( $http, $filter ) {
-    var jsonPath = '/static/css/main.json';
-    var data = [];
-    var addData = function( newObj ) {
-        data.push( newObj );
-    };
-    var fetchData = function() {
-      $http.get( jsonPath ).
-        success( function( response, status, headers, config ) {
-          var cleanResponse = $filter('doxrayAppData')( response );
-          angular.copy( cleanResponse, data );
-        }).
-        error( function ( data, status, headers, config ) {
-          console.error( 'Error getting', jsonPath );
-        });
-    };
-    fetchData(function(){});
-    return {
-      data: data,
-      fetchData: fetchData,
-      addData: addData
-    };
-  });
-
-  angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $filter, dataService ) {
+  angular.module('doxrayApp').controller( 'DocsCtrl', function ( $scope, $http, $filter ) {
     // Properties
+    $scope.jsonPath = '/static/css/main.json';
     $scope.title = 'Docs:';
-    $scope.data = dataService.data;
+    $scope.data = [];
     $scope.families = [];
     $scope.currentFamily = '';
     // Events
-    $scope.$watchCollection( 'data', function( newData, oldData ) {
-      $scope.families = $filter('doxrayFamilies')( newData );
-      $scope.currentFamily = $scope.families[ 0 ];
-    });
     $scope.$on( 'onRepeatLast', function( scope, element, attrs ){
       var code = document.querySelectorAll('.lang-css, .lang-less, .lang-xml');
       angular.forEach( code, function( element ) {
@@ -60,6 +33,17 @@
       pattern.showCSS = false;
       pattern.showLESS = true;
     };
+    // Init
+    $http.get( $scope.jsonPath ).
+      success( function( response, status, headers, config ) {
+        var filteredResponse = $filter('doxrayAppData')( response );
+        angular.copy( filteredResponse, $scope.data );
+        $scope.families = $filter('doxrayFamilies')( $scope.data );
+        $scope.currentFamily = $scope.families[ 0 ];
+      }).
+      error( function ( data, status, headers, config ) {
+        console.error( 'Error getting', $scope.jsonPath );
+      });
   });
 
   /* Return an array of Dox-ray objects prepped for use in doxrayApp.
