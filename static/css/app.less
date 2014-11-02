@@ -145,14 +145,18 @@
 
     &_rendered {
         .pattern-box();
-        padding: @padding;
+        padding: 0;
         margin: -2px -5px -5px;
-        border: 0;
+        border: 1px solid @white;
         background: @white;
 
         position: relative;
         z-index: 2;
         box-shadow: 0 0 20px @shadow;
+    }
+
+    &_rendered-inner {
+        margin: @padding;
     }
 
     &_docs {
@@ -176,8 +180,14 @@
         border-top-right-radius: 4px;
     }
 
-    &_content .hljs {
-        font-size: 15px;
+    &_codenote,
+    &_css,
+    &_less,
+    &_markup {
+        & {
+            .hljs();
+            font-size: 15px;
+        }
     }
 
     &_code-col {

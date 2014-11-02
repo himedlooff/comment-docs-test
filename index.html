@@ -49,13 +49,18 @@
                 </button>
             </div>
             <div class="pattern_docs">
-                <div ng-repeat="pattern in pattern.docs.patterns" class="pattern_sub-pattern">
-                    <h1 ng-if="pattern.name" class="pattern_name">{{ pattern.name }}</h1>
-                    <div ng-if="pattern.markup"
-                         ng-bind-html="pattern.markup"
-                         class="pattern_rendered"></div>
-                    <pre ng-if="pattern.markup" class="pattern_content pattern_content__markup"><code class="xml">{{ pattern.markup }}</code></pre>
-                    <pre ng-repeat="codenote in pattern.codenotes" class="pattern_content"><code class="pattern_codenote">{{ codenote }}</code></pre>
+                <div ng-repeat="pattern in pattern.docs.patterns"
+                     class="pattern_sub-pattern">
+                    <h1 ng-if="pattern.name"
+                        class="pattern_name">{{ pattern.name }}</h1>
+                    <div ng-if="pattern.markup" class="pattern_rendered">
+                        <div ng-bind-html="pattern.markup"
+                             class="pattern_rendered-inner"></div>
+                    </div>
+                    <pre ng-if="pattern.markup"
+                         class="pattern_content"><code class="xml pattern_markup">{{ pattern.markup }}</code></pre>
+                    <pre ng-repeat="codenote in pattern.codenotes"
+                         class="pattern_content"><code class="pattern_codenote">{{ codenote }}</code></pre>
                     <p ng-if="pattern.notes"
                        ng-repeat="note in pattern.notes"
                        class="pattern_content">
@@ -69,10 +74,10 @@
                 <div class="pattern_code-container">
                     <pre ng-if="pattern.code"
                          ng-show="pattern.showCSS"
-                         class="pattern_code pattern_code__css"><code class="css">{{ pattern.code }}</code></pre>
+                         class="pattern_code"><code class="css pattern_css">{{ pattern.code }}</code></pre>
                     <pre ng-if="pattern.code_alt"
                          ng-show="pattern.showLESS"
-                         class="pattern_code pattern_code__less"><code class="less">{{ pattern.code_alt }}</code></pre>
+                         class="pattern_code"><code class="less pattern_less">{{ pattern.code_alt }}</code></pre>
                 </div>
             </div>
         </div>
