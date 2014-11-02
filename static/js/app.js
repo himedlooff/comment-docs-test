@@ -16,7 +16,7 @@
     $scope.currentFamily = '';
     // Events
     $scope.$on( 'onRepeatLast', function( scope, element, attrs ){
-      var code = document.querySelectorAll('.lang-css, .lang-less, .lang-xml');
+      var code = document.querySelectorAll('.css, .less, .xml, .pattern_codenote');
       angular.forEach( code, function( element ) {
         hljs.highlightBlock( element );
       });

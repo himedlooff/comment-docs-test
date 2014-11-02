@@ -20,59 +20,27 @@ Orginal Style from ethanschoonover.com/solarized (c) Jeremy Hull <sourdrums@gmai
     -webkit-text-size-adjust: none;
 }
 
-.lang-xml {
-    font-size: 15px;
+.hljs.css,
+.hljs.less {
+    #app-colors .code();
+    .hljs-comment   { color: @light-gray; }
+    .hljs-variable,
+    .hljs-at_rule   { color: @green; }
+    .hljs-tag,
+    .hljs-keyword,
+    .hljs-class,
+    .hljs-pseudo    { color: @blue; }
+    .hljs-attribute { color: @plum; }
+    .hljs-function,
+    .hljs-important { color: @rose; }
+    .hljs-string    { color: @copper; }
 }
 
-.lang-css .hljs,
-.lang-less .hljs {
-
+.hljs.xml {
     #app-colors .code();
-
-    &-comment {
-        color: @light-gray;
-    }
-    &-variable,
-    &-at_rule {
-        color: @green;
-    }
-    &-tag,
-    &-keyword,
-    &-class,
-    &-pseudo {
-        color: @blue;
-    }
-    &-attribute {
-        color: @plum;
-    }
-    &-function,
-    &-important {
-        color: @rose;
-    }
-    &-string {
-        color: @copper;
-    }
-
-}
-
-.lang-xml .hljs {
-
-    #app-colors .code();
-
-    &-comment {
-        color: @light-gray;
-    }
-    &-value {
-        color: @blue;
-    }
-    &-tag {
-        color: @plum-light;
-    }
-    &-title {
-        color: @plum;
-    }
-    &-attribute {
-        color: @green;
-    }
-
+    .hljs-comment   { color: @light-gray; }
+    .hljs-value     { color: @blue; }
+    .hljs-tag       { color: @plum-light; }
+    .hljs-title     { color: @plum; }
+    .hljs-attribute { color: @green; }
 }

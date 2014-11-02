@@ -55,10 +55,10 @@
                     <div ng-if="pattern.markup"
                          ng-bind-html="pattern.markup"
                          class="pattern_rendered"></div>
-                    <pre ng-if="pattern.markup" class="pattern_content"><code class="lang-xml">{{ pattern.markup }}</code></pre>
+                    <pre ng-if="pattern.markup" class="pattern_content"><code class="xml">{{ pattern.markup }}</code></pre>
                     <div ng-if="pattern.codenotes" class="pattern_content">
                         <div ng-repeat="codenote in pattern.codenotes">
-                            <pre><code>{{ codenote }}</code></pre>
+                            <pre><code class="pattern_codenote">{{ codenote }}</code></pre>
                         </div>
                     </div>
                     <div ng-if="pattern.notes" class="pattern_content">
@@ -77,12 +77,12 @@
                     <div ng-if="pattern.code"
                          ng-show="pattern.showCSS"
                          class="pattern_code pattern_code__css">
-                        <pre><code class="lang-css">{{ pattern.code }}</code></pre>
+                        <pre><code class="css">{{ pattern.code }}</code></pre>
                     </div>
                     <div ng-if="pattern.code_alt"
                          ng-show="pattern.showLESS"
                          class="pattern_code pattern_code__less">
-                        <pre><code class="lang-less">{{ pattern.code_alt }}</code></pre>
+                        <pre><code class="less">{{ pattern.code_alt }}</code></pre>
                     </div>
                 </div>
             </div>
