@@ -56,18 +56,12 @@
                          ng-bind-html="pattern.markup"
                          class="pattern_rendered"></div>
                     <pre ng-if="pattern.markup" class="pattern_content pattern_content__markup"><code class="xml">{{ pattern.markup }}</code></pre>
-                    <div ng-if="pattern.codenotes" class="pattern_content">
-                        <div ng-repeat="codenote in pattern.codenotes">
-                            <pre><code class="pattern_codenote">{{ codenote }}</code></pre>
-                        </div>
-                    </div>
-                    <div ng-if="pattern.notes" class="pattern_content">
-                        <ul>
-                            <li ng-repeat="note in pattern.notes">
-                                {{ note }}
-                            </li>
-                        </ul>
-                    </div>
+                    <pre ng-repeat="codenote in pattern.codenotes" class="pattern_content"><code class="pattern_codenote">{{ codenote }}</code></pre>
+                    <p ng-if="pattern.notes"
+                       ng-repeat="note in pattern.notes"
+                       class="pattern_content">
+                        {{ note }}
+                    </p>
                 </div>
             </div>
             <div ng-if="pattern.code || pattern.code_alt"
