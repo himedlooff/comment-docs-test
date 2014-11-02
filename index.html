@@ -74,16 +74,12 @@
                  ng-show="pattern.showCSS || pattern.showLESS"
                  class="pattern_code-col">
                 <div class="pattern_code-container">
-                    <div ng-if="pattern.code"
+                    <pre ng-if="pattern.code"
                          ng-show="pattern.showCSS"
-                         class="pattern_code pattern_code__css">
-                        <pre><code class="css">{{ pattern.code }}</code></pre>
-                    </div>
-                    <div ng-if="pattern.code_alt"
+                         class="pattern_code pattern_code__css"><code class="css">{{ pattern.code }}</code></pre>
+                    <pre ng-if="pattern.code_alt"
                          ng-show="pattern.showLESS"
-                         class="pattern_code pattern_code__less">
-                        <pre><code class="less">{{ pattern.code_alt }}</code></pre>
-                    </div>
+                         class="pattern_code pattern_code__less"><code class="less">{{ pattern.code_alt }}</code></pre>
                 </div>
             </div>
         </div>
