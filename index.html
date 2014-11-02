@@ -55,7 +55,7 @@
                     <div ng-if="pattern.markup"
                          ng-bind-html="pattern.markup"
                          class="pattern_rendered"></div>
-                    <pre ng-if="pattern.markup" class="pattern_content"><code class="xml">{{ pattern.markup }}</code></pre>
+                    <pre ng-if="pattern.markup" class="pattern_content pattern_content__markup"><code class="xml">{{ pattern.markup }}</code></pre>
                     <div ng-if="pattern.codenotes" class="pattern_content">
                         <div ng-repeat="codenote in pattern.codenotes">
                             <pre><code class="pattern_codenote">{{ codenote }}</code></pre>
