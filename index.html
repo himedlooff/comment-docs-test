@@ -30,22 +30,30 @@
         <div ng-repeat="pattern in data | doxrayFamily:currentFamily"
              on-last-repeat
              class="pattern ng-class:{'pattern__split':pattern.split};">
-            <h1 class="pattern_title">{{ pattern.docs.name }}</h1>
-            <div class="pattern_code-toggles">
-                <button ng-if="pattern.code_alt"
-                        ng-click="toggleLESS( pattern )"
-                        class="ng-class:{'btn__grouped-first':pattern.code, 'btn__secondary':!pattern.showLESS};
-                               btn
-                               btn__less">
-                    LESS
-                </button>
-                <button ng-if="pattern.code"
-                        ng-click="toggleCSS( pattern )"
-                        class="ng-class:{'btn__grouped-last':pattern.code_alt, 'btn__secondary':!pattern.showCSS};
-                               btn
-                               btn__css">
-                    CSS
-                </button>
+            <div class="pattern_masthead">
+                <div class="pattern_code-toggles">
+                    <button ng-if="pattern.code_alt"
+                            ng-click="toggleLESS( pattern )"
+                            class="ng-class:{'btn__grouped-first':pattern.code, 'btn__secondary':!pattern.showLESS};
+                                   btn
+                                   btn__less">
+                        LESS
+                    </button>
+                    <button ng-if="pattern.code"
+                            ng-click="toggleCSS( pattern )"
+                            class="ng-class:{'btn__grouped-last':pattern.code_alt, 'btn__secondary':!pattern.showCSS};
+                                   btn
+                                   btn__css">
+                        CSS
+                    </button>
+                </div>
+                <h1 class="pattern_title">{{ pattern.docs.name }}</h1>
+                <pre ng-repeat="codenote in pattern.docs.codenotes"
+                     class="pattern_content"><code class="pattern_codenote">{{ codenote }}</code></pre>
+                <p ng-repeat="note in pattern.docs.notes"
+                   class="pattern_content pattern_note">
+                    {{ note }}
+                </p>
             </div>
             <div class="pattern_docs">
                 <div ng-repeat="pattern in pattern.docs.patterns"
@@ -60,8 +68,7 @@
                          class="pattern_content"><code class="xml pattern_markup">{{ pattern.markup }}</code></pre>
                     <pre ng-repeat="codenote in pattern.codenotes"
                          class="pattern_content"><code class="pattern_codenote">{{ codenote }}</code></pre>
-                    <p ng-if="pattern.notes"
-                       ng-repeat="note in pattern.notes"
+                    <p ng-repeat="note in pattern.notes"
                        class="pattern_content pattern_note">
                         {{ note }}
                     </p>
