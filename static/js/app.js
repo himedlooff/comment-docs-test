@@ -128,6 +128,7 @@
   });
 
   /* Creates a hook when ng-repeat finishes
+     http://www.nodewiz.biz/angular-js-final-callback-after-ng-repeat/
      ========================================================================== */
   angular.module('doxrayApp').directive( 'onLastRepeat', function () {
     return function( scope, element, attrs ) {
