@@ -14,14 +14,14 @@
         <ul class="nav">
             <li ng-repeat="family in families" class="nav_item">
                 <button ng-click="setFamily(family)" class="nav_btn">{{ family }}</button>
-                <!-- <ul class="nav nav__sub">
+                <ul class="nav nav__sub">
                     <li ng-repeat="pattern in data | doxrayFamily:family"
                         ng-if="family == currentFamily">
-                        <button class="nav_btn nav_btn__sub">
+                        <a class="nav_btn nav_btn__sub" href="#{{ pattern.slug }}">
                             {{ pattern.docs.name }}
-                        </button>
+                        </a>
                     </li>
-                </ul> -->
+                </ul>
             </li>
         </ul>
     </div>
@@ -29,6 +29,7 @@
     <div class="main" id="main">
         <div ng-repeat="pattern in data | doxrayFamily:currentFamily"
              on-last-repeat
+             id="{{ pattern.slug }}"
              class="pattern ng-class:{'pattern__split':pattern.split};">
             <div class="pattern_masthead">
                 <div class="pattern_code-toggles">
