@@ -87,13 +87,13 @@
 
     // Variables
 
-    @padding: 30px;
+    @padding: 20px;
 
     // Mixins
 
     .pattern-box {
         display: block;
-        padding: (@padding - 10px) @padding;
+        padding: @padding;
         margin: 0 0 -1px;
         border: 1px solid @border;
         background: @bg;
@@ -103,11 +103,11 @@
 
     & {
         margin: 0;
-        padding: (@padding + 5px) (@padding / 2);
+        padding: @grid_gutter-width (@grid_gutter-width / 2) (@grid_gutter-width + 5px);
         background: @white;
         border-radius: 4px;
         & + & {
-            margin-top: @padding;
+            margin-top: @grid_gutter-width / 2;
         }
     }
 
@@ -205,8 +205,8 @@
     }
 
     &_content + &_content {
-        margin-top: -6px;
-        padding-top: 14px;
+        margin-top: -8px;
+        padding-top: 12px;
         border-top-style: dotted;
     }
 
@@ -248,7 +248,7 @@
     &_code {
         float: left;
         margin: 0;
-        padding: @padding - 10px;
+        padding: @padding;
     }
 
 }
