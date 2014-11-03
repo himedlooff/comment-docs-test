@@ -14,7 +14,8 @@
     &_title {
         margin: @grid_gutter-width 0 (@grid_gutter-width / 2);
         color: @white;
-        .webfont-medium();
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
         font-size: unit(24px / @base-font-size-px, em);
     }
 }
@@ -37,7 +38,8 @@
         border: 0;
         background: transparent;
         .u-link__colors(@white);
-        .webfont-demi();
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 800;
         font-size: unit(26px / @base-font-size-px, em);
         line-height: 1;
         text-align: left;
@@ -58,7 +60,8 @@
 
     &_btn__sub {
         font-size: unit(20px / @base-font-size-px, em);
-        .webfont-regular();
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
         .u-link__colors(@white, @white, @white, @white, @white,
                         @pacific-80, @pacific-80, transparent, transparent, @pacific-80);
         border-style: dotted;
@@ -134,7 +137,8 @@
         @font-size: 32px;
         margin: 0;
         color: @black;
-        .webfont-regular();
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
         font-size: unit(@font-size / @base-font-size-px, em);
         line-height: 1;
     }
@@ -147,7 +151,8 @@
         @font-size: 20px;
         display: inline-block;
         color: @black;
-        .webfont-regular();
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
         font-size: unit(@font-size / @base-font-size-px, em);
         line-height: 1;
     }
@@ -220,7 +225,9 @@
     }
 
     &_note {
-        font-family: 'Inconsolata', monospace;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 300;
+        font-style: italic;
         font-size: 16px;
     }
 
