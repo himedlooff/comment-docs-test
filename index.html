@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>comment-docs-test</title>
     <link rel="stylesheet" href="/static/css/main.css">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>
     <script src="/static/js/main.js"></script>
 </head>
 <body ng-app="doxrayApp" ng-controller="DocsCtrl" class="body">
@@ -63,7 +64,7 @@
                          class="pattern_content"><code class="pattern_codenote">{{ codenote }}</code></pre>
                     <p ng-if="pattern.notes"
                        ng-repeat="note in pattern.notes"
-                       class="pattern_content">
+                       class="pattern_content pattern_note">
                         {{ note }}
                     </p>
                 </div>
