@@ -29,22 +29,20 @@
     <div class="main" id="main">
         <div ng-repeat="pattern in data | doxrayFamily:currentFamily"
              on-last-repeat
-             class="pattern">
+             class="pattern ng-class:{'pattern__split':pattern.split};">
             <h1 class="pattern_title">{{ pattern.docs.name }}</h1>
             <div class="pattern_code-toggles">
                 <button ng-if="pattern.code_alt"
                         ng-click="toggleLESS( pattern )"
-                        class="ng-class:{'btn__grouped-first':pattern.code};
+                        class="ng-class:{'btn__grouped-first':pattern.code, 'btn__secondary':!pattern.showLESS};
                                btn
-                               btn__secondary
                                btn__less">
                     LESS
                 </button>
                 <button ng-if="pattern.code"
                         ng-click="toggleCSS( pattern )"
-                        class="ng-class:{'btn__grouped-last':pattern.code_alt};
+                        class="ng-class:{'btn__grouped-last':pattern.code_alt, 'btn__secondary':!pattern.showCSS};
                                btn
-                               btn__secondary
                                btn__css">
                     CSS
                 </button>

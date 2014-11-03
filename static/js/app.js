@@ -26,12 +26,26 @@
       $scope.currentFamily = family;
     };
     $scope.toggleCSS = function ( pattern ) {
-      pattern.showCSS = true;
-      pattern.showLESS = false;
+      if ( pattern.showCSS ) {
+        pattern.showCSS = false;
+        pattern.showLESS = false;
+        pattern.split = false;
+      } else {
+        pattern.showCSS = true;
+        pattern.showLESS = false;
+        pattern.split = true;
+      }
     };
     $scope.toggleLESS = function ( pattern ) {
-      pattern.showCSS = false;
-      pattern.showLESS = true;
+      if ( pattern.showLESS ) {
+        pattern.showLESS = false;
+        pattern.showCSS = false;
+        pattern.split = false;
+      } else {
+        pattern.showLESS = true;
+        pattern.showCSS = false;
+        pattern.split = true;
+      }
     };
     // Init
     $http.get( $scope.jsonPath ).
@@ -49,6 +63,10 @@
     return function( patterns ) {
       var output = [];
       angular.forEach( patterns, function( pattern ) {
+        // Set up some state variables.
+        pattern.split = false;
+        pattern.showCSS = false;
+        pattern.showLESS = false;
         try {
           if ( pattern.docs.patterns ) {
             angular.forEach( pattern.docs.patterns, function( subPattern ) {

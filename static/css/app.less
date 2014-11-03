@@ -158,10 +158,6 @@
         margin: @padding;
     }
 
-    &_docs {
-        .grid_column(9);
-    }
-
     &_content {
         .pattern-box();
 
@@ -199,10 +195,6 @@
         font-size: 16px;
     }
 
-    &_code-col {
-        .grid_column(3);
-    }
-
     &_code-container {
         .pattern-box();
         padding: 0;
@@ -215,6 +207,16 @@
         float: left;
         margin: 0;
         padding: @padding - 10px;
+    }
+
+    &_docs {
+        .grid_column(12);
+    }
+    &__split &_docs {
+        .grid_column(6);
+    }
+    &__split &_code-col {
+        .grid_column(6);
     }
 
 }
