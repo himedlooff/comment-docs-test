@@ -5,20 +5,17 @@
 
 .body {
     background: @pacific;
-    padding: 0;
+    padding: @grid_gutter-width (@grid_gutter-width / 2);
 }
 
 .masthead {
-    .grid_column(2);
-
-    padding: @grid_gutter-width
-             (@grid_gutter-width / 2)
-             0;
+    .grid_column(3);
 
     &_title {
+        margin: @grid_gutter-width 0 (@grid_gutter-width / 2);
         color: @white;
-        .webfont-demi();
-        font-size: unit(20px / @base-font-size-px, em);
+        .webfont-medium();
+        font-size: unit(24px / @base-font-size-px, em);
     }
 }
 
@@ -29,38 +26,49 @@
 
     &_item {
         display: block;
-        margin-right: unit(16px / @base-font-size-px, em);
-        vertical-align: middle;
+        & + & {
+            margin-top: -1px;
+        }
     }
 
     &_btn {
-        padding: unit(2px / @base-font-size-px, em) unit(4px / @base-font-size-px, em);
+        display: block;
+        padding: unit(10px / @base-font-size-px, em) 0;
         border: 0;
         background: transparent;
-        color: @white;
-        .webfont-medium();
+        .u-link__colors(@white);
+        .webfont-demi();
+        font-size: unit(26px / @base-font-size-px, em);
         line-height: 1;
         text-align: left;
+        transition: 0.075s padding;
 
+        &:hover,
         &:focus {
-            outline: 1px dotted @white;
-            outline-offset: 1px;
+            padding-left: unit(10px / @base-font-size-px, em);
+            padding-right: unit(10px / @base-font-size-px, em);
+            background: @pacific;
+            outline: 1px solid @white;
         }
     }
 
     &__sub {
-        margin-left: @grid_gutter-width / 2;
+        margin: -1px 0 unit((@grid_gutter-width / 2) / @base-font-size-px, em);
     }
 
     &_btn__sub {
+        font-size: unit(20px / @base-font-size-px, em);
         .webfont-regular();
-        .u-link__colors(@white);
+        .u-link__colors(@white, @white, @white, @white, @white,
+                        @pacific-80, @pacific-80, transparent, transparent, @pacific-80);
+        border-style: dotted;
+        border-top-width: 1px;
+        border-bottom-width: 1px;
     }
 }
 
 .main {
-    .grid_column(10);
-    padding: @grid_gutter-width;
+    .grid_column(9);
 }
 
 .comment-doc {
@@ -101,10 +109,6 @@
     }
 
     // Grid
-
-    & {
-        .grid_nested-col-group();
-    }
 
     &_masthead,
     &_docs {

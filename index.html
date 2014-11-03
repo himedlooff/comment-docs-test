@@ -13,10 +13,12 @@
         <h1 class="masthead_title">{{ title }}</h1>
         <ul class="nav">
             <li ng-repeat="family in families" class="nav_item">
-                <button ng-click="setFamily(family)" class="nav_btn">{{ family }}</button>
-                <ul class="nav nav__sub">
+                <a ng-click="setFamily(family)"
+                   class="nav_btn"
+                   href="#">{{ family }}</a>
+                <ul ng-if="family == currentFamily" class="nav nav__sub">
                     <li ng-repeat="pattern in data | doxrayFamily:family"
-                        ng-if="family == currentFamily">
+                        class="nav_item">
                         <a class="nav_btn nav_btn__sub" href="#{{ pattern.slug }}">
                             {{ pattern.docs.name }}
                         </a>
@@ -26,7 +28,7 @@
         </ul>
     </div>
 
-    <div class="main" id="main">
+    <div class="main">
         <div ng-repeat="pattern in data | doxrayFamily:currentFamily"
              on-last-repeat
              id="{{ pattern.slug }}"
