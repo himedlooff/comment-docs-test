@@ -1,23 +1,25 @@
 {
-  "name": "comment-docs-test",
+  "name": "dox-ray-demo",
   "version": "0.1.0",
-  "description": "Testing comment-docs.",
+  "description": "Testing Dox-ray with Angular.",
   "keywords": [
+    "angular",
+    "demo",
     "documentation",
-    "capital-framework"
+    "dox-ray"
   ],
   "authors": [
     {
-      "name": "Consumer Financial Protection Bureau",
-      "url": "http://cfpb.github.io/"
+      "name": "Michael Morici",
+      "url": "https://github.com/himedlooff/"
     }
   ],
-  "homepage": "https://github.com/cfpb/comment-docs-test",
+  "homepage": "https://github.com/cfpb/dox-ray-demo",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cfpb/comment-docs-test.git"
+    "url": "https://github.com/cfpb/dox-ray-demo.git"
   },
-  "license": "https://github.com/cfpb/comment-docs-test/blob/master/TERMS.md",
+  "license": "https://github.com/cfpb/dox-ray-demo/blob/master/TERMS.md",
   "dependencies": {
     "angular": "~1.3.1",
     "angular-sanitize": "~1.3.1",

@@ -69,28 +69,6 @@ module.exports = function(grunt) {
     },
 
     /**
-     * Copy: https://github.com/gruntjs/grunt-contrib-copy
-     * 
-     * Copy files and folders.
-     */
-    copy: {
-      vendor: {
-        files:
-        [
-          {
-            expand: true,
-            cwd: '',
-            src: [
-              // Only include vendor files that we use independently
-              'vendor/box-sizing-polyfill/boxsizing.htc'
-            ],
-            dest: 'static'
-          }
-        ]
-      }
-    },
-
-    /**
      * Less: https://github.com/gruntjs/grunt-contrib-less
      * 
      * Compile Less files to CSS.
@@ -141,7 +119,7 @@ module.exports = function(grunt) {
       }
     },
 
-    docs: {
+    doxray: {
       main: {
         src: ['static/css/main.css', 'vendor/cf-concat/cf.less'],
         dest: 'static/css/main.json',
@@ -155,9 +133,9 @@ module.exports = function(grunt) {
   grunt.initConfig(config);
 
   /**
-   * comment-docs
+   * Dox-ray task
    */
-  grunt.registerMultiTask( 'docs', 'Parses documentation from code comments.', function() {
+  grunt.registerMultiTask( 'doxray', 'Parses documentation from code comments.', function() {
     var CommentDocs, docMaker, asyncDone, options;
     asyncDone = this.async();
     options = this.options();
@@ -171,11 +149,11 @@ module.exports = function(grunt) {
   });
 
   /**
-   * Create custom task aliases and combinations.
+   * Custom task aliases and combinations.
    */
   grunt.registerTask('vendor', ['bower:install', 'concat:cf-less']);
   grunt.registerTask('cssdev', ['less', 'autoprefixer']);
   grunt.registerTask('jsdev', ['concat:bodyScripts']);
-  grunt.registerTask('default', ['vendor', 'docs', 'cssdev', 'jsdev', 'copy:vendor']);
+  grunt.registerTask('default', ['cssdev', 'jsdev']);
 
 };
