@@ -19,7 +19,7 @@
     "type": "git",
     "url": "https://github.com/cfpb/dox-ray-angular-demo.git"
   },
-  "license": "https://github.com/cfpb/dox-ray-angular-demo/blob/master/TERMS.md",
+  "license": "https://github.com/himedlooff/dox-ray-angular-demo/blob/master/LICENSE",
   "dependencies": {
     "angular": "~1.3.1",
     "angular-sanitize": "~1.3.1",
