@@ -172,6 +172,8 @@ module.exports = function(grunt) {
    * Custom task aliases and combinations.
    */
   grunt.registerTask('vendor', ['bower:install', 'concat:cf-less']);
+  // Note that since Capital Framework files use Topdoc comments we need to
+  // replace the string "topdoc" with "doxray".
   grunt.registerTask('make-docs', ['replace:topdoc', 'doxray:main']);
   grunt.registerTask('cssdev', ['less', 'autoprefixer']);
   grunt.registerTask('jsdev', ['concat:bodyScripts']);
