@@ -2,6 +2,8 @@
 
 An Angular playground to test out Dox-ray.
 
+![dox-ray screenshot](screenshot.png)
+
 
 ## Getting started
 
