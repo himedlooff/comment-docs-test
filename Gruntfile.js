@@ -155,7 +155,6 @@ module.exports = function(grunt) {
     options = this.options();
     Doxray = require('dox-ray');
     doxray = new Doxray();
-    grunt.task.run('replace');
     this.files.forEach( function( file ) {
       var docs = doxray.parse( file.src, options.mergeProp );
       try {
@@ -173,6 +172,7 @@ module.exports = function(grunt) {
    * Custom task aliases and combinations.
    */
   grunt.registerTask('vendor', ['bower:install', 'concat:cf-less']);
+  grunt.registerTask('make-docs', ['replace:topdoc', 'doxray:main']);
   grunt.registerTask('cssdev', ['less', 'autoprefixer']);
   grunt.registerTask('jsdev', ['concat:bodyScripts']);
   grunt.registerTask('default', ['cssdev', 'jsdev']);
