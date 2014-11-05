@@ -24,7 +24,7 @@ $ npm install -g grunt-cli bower
 $ npm install
 $ grunt vendor
 # Build the JSON file using Dox-ray, this will be the model used in Angular:
-$ grunt doxray
+$ grunt make-docs
 # Compile the CSS and JS:
 $ grunt
 # You can manually compile the CSS or JS with the following tasks:
