@@ -40,7 +40,7 @@ $ grunt watch
 I welcome your feedback and contributions.
 Please read [CONTRIBUTING](CONTRIBUTING.md).
 
-To file a bug please us this handy [template](https://github.com/himedlooff/dox-ray-demo/issues/new?body=%23%23%20URL%0D%0D%0D%23%23%20Actual%20Behavior%0D%0D%0D%23%23%20Expected%20Behavior%0D%0D%0D%23%23%20Steps%20to%20Reproduce%0D%0D%0D%23%23%20Screenshot&labels=bug).
+To file a bug please us this handy [template](https://github.com/himedlooff/dox-ray-angular-demo/issues/new?body=%23%23%20URL%0D%0D%0D%23%23%20Actual%20Behavior%0D%0D%0D%23%23%20Expected%20Behavior%0D%0D%0D%23%23%20Steps%20to%20Reproduce%0D%0D%0D%23%23%20Screenshot&labels=bug).
 
 
 ----
