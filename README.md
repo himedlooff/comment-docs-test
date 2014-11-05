@@ -17,14 +17,14 @@ $ npm install -g grunt-cli bower
 
 ### Developing
 
-Each time you fetch from upstream,
-install dependencies with npm,
-update vendor files with `grunt vendor`,
-then run `grunt` to build everything:
-
 ```bash
+# Install/update npm and bower dependencies:
 $ npm install
 $ grunt vendor
+# Build the JSON file using Dox-ray,
+# this will be the model used in Angular:
+$ grunt doxray
+# Compile the CSS and JS:
 $ grunt
 ```
 
