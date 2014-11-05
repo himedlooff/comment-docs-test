@@ -143,8 +143,14 @@ module.exports = function(grunt) {
     docMaker = new CommentDocs();
     this.files.forEach( function( file ) {
       var docs = docMaker.parse( file.src, options.mergeProp );
-      docMaker.writeJSON( docs, file.dest );
-      asyncDone();
+      try {
+        docMaker.writeJSON( docs, file.dest );
+        grunt.log.ok( 'Dox-ray succesfully created', file.dest );
+        asyncDone();
+      } catch ( e ) {
+        grunt.log.error( 'Dox-ray could not create', file.dest );
+        asyncDone();
+      }
     });
   });
 
