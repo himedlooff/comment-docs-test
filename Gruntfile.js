@@ -103,6 +103,20 @@ module.exports = function(grunt) {
     },
 
     /**
+     * Text replace: https://www.npmjs.org/package/grunt-text-replace
+     */
+    replace: {
+      topdoc: {
+        src: ['static/css/main.css', 'vendor/cf-concat/cf.less'],
+        overwrite: true,
+        replacements: [{
+          from: '/* topdoc',
+          to: '/* doxray'
+        }]
+      }
+    },
+
+    /**
      * Watch: https://github.com/gruntjs/grunt-contrib-watch
      * 
      * Run predefined tasks whenever watched file patterns are added, changed or deleted.
@@ -136,15 +150,16 @@ module.exports = function(grunt) {
    * Dox-ray task
    */
   grunt.registerMultiTask( 'doxray', 'Parses documentation from code comments.', function() {
-    var CommentDocs, docMaker, asyncDone, options;
+    var Doxray, doxray, asyncDone, options;
     asyncDone = this.async();
     options = this.options();
-    CommentDocs = require('comment-docs');
-    docMaker = new CommentDocs();
+    Doxray = require('dox-ray');
+    doxray = new Doxray();
+    grunt.task.run('replace');
     this.files.forEach( function( file ) {
-      var docs = docMaker.parse( file.src, options.mergeProp );
+      var docs = doxray.parse( file.src, options.mergeProp );
       try {
-        docMaker.writeJSON( docs, file.dest );
+        doxray.writeJSON( docs, file.dest );
         grunt.log.ok( 'Dox-ray succesfully created', file.dest );
         asyncDone();
       } catch ( e ) {
