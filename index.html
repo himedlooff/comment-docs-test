@@ -35,16 +35,16 @@
              class="pattern ng-class:{'pattern__split':pattern.split};">
             <div class="pattern_masthead">
                 <div class="pattern_code-toggles">
-                    <button ng-if="pattern.code_alt"
+                    <button ng-if="pattern.code.less"
                             ng-click="toggleLESS( pattern )"
-                            class="ng-class:{'btn__grouped-first':pattern.code, 'btn__secondary':!pattern.showLESS};
+                            class="ng-class:{'btn__grouped-first':pattern.code.css, 'btn__secondary':!pattern.showLESS};
                                    btn
                                    btn__less">
                         LESS
                     </button>
-                    <button ng-if="pattern.code"
+                    <button ng-if="pattern.code.css"
                             ng-click="toggleCSS( pattern )"
-                            class="ng-class:{'btn__grouped-last':pattern.code_alt, 'btn__secondary':!pattern.showCSS};
+                            class="ng-class:{'btn__grouped-last':pattern.code.less, 'btn__secondary':!pattern.showCSS};
                                    btn
                                    btn__css">
                         CSS
@@ -77,16 +77,16 @@
                     </p>
                 </div>
             </div>
-            <div ng-if="pattern.code || pattern.code_alt"
+            <div ng-if="pattern.code.css || pattern.code.less"
                  ng-show="pattern.showCSS || pattern.showLESS"
                  class="pattern_code-col">
                 <div class="pattern_code-container">
-                    <pre ng-if="pattern.code"
+                    <pre ng-if="pattern.code.css"
                          ng-show="pattern.showCSS"
-                         class="pattern_code"><code class="css pattern_css">{{ pattern.code }}</code></pre>
-                    <pre ng-if="pattern.code_alt"
+                         class="pattern_code"><code class="css pattern_css">{{ pattern.code.css.code }}</code></pre>
+                    <pre ng-if="pattern.code.less"
                          ng-show="pattern.showLESS"
-                         class="pattern_code"><code class="less pattern_less">{{ pattern.code_alt }}</code></pre>
+                         class="pattern_code"><code class="less pattern_less">{{ pattern.code.less.code }}</code></pre>
                 </div>
             </div>
         </div>

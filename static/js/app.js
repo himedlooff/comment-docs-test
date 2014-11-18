@@ -64,7 +64,7 @@
       var output = [];
       angular.forEach( patterns, function( pattern ) {
         try {
-          // Set up some state variables.
+          // States
           pattern.split = false;
           pattern.showCSS = false;
           pattern.showLESS = false;
@@ -83,6 +83,19 @@
           if ( typeof pattern.docs.eof === 'undefined' ) {
             output.push( pattern );
           }
+          // Prep needed for the code property
+          var codeItems = [];
+          angular.forEach( pattern.code, function( code, index ) {
+            if ( code.code != '' ) {
+              code.type = code.type.replace('.', '');
+              code.showKey = 'show' + code.type.toUpperCase();
+              codeItems.push( code );
+            }
+          });
+          pattern.code = {};
+          angular.forEach( codeItems, function( code, index ) {
+            pattern.code[code.type] = code;
+          });
         } catch ( e ) {
           console.error( e );
         }

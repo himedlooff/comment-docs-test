@@ -138,7 +138,7 @@ module.exports = function(grunt) {
         src: ['static/css/main.css', 'vendor/cf-concat/cf.less'],
         dest: 'static/css/main.json',
         options: {
-          mergeProp: 'name'
+          merge: true
         }
       }
     }
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
     Doxray = require('dox-ray');
     doxray = new Doxray();
     this.files.forEach( function( file ) {
-      var docs = doxray.parse( file.src, options.mergeProp );
+      var docs = doxray.parse( file.src, options.merge );
       try {
         doxray.writeJSON( docs, file.dest );
         grunt.log.ok( 'Dox-ray succesfully created', file.dest );
