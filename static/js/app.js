@@ -140,6 +140,16 @@
     };
   });
 
+  angular.module('doxrayApp').directive( 'repo', function() {
+    return {
+      restrict: 'E',
+      scope: {
+        repo: '='
+      },
+      templateUrl: '/static/templates/repo.html'
+    };
+  });
+
   /* Creates a hook when ng-repeat finishes
      http://www.nodewiz.biz/angular-js-final-callback-after-ng-repeat/
      ========================================================================== */
